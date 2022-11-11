@@ -38,7 +38,7 @@
             <ion-label>Tiempo</ion-label>
           </ion-segment-button>
           <ion-segment-button value="distancia">
-            <ion-label>Distancia</ion-label>
+            <ion-label>Penetracion</ion-label>
           </ion-segment-button>
         </ion-segment>
 
@@ -80,35 +80,34 @@
     </ion-button>
   </form>
 
-  <ion-card>
+  <ion-card *ngIf="gas_requerido">
     <ion-card-header>
       <ion-card-title>Resultado</ion-card-title>
-      <ion-card-subtitle>Datos calculados utiles para planificar la inmersion</ion-card-subtitle>
+      <ion-card-subtitle>Datos calculados utiles para planificar la inmersion <ion-text color="danger">En ningun calculo se tiene en cuenta el gas requerido para la descompresion </ion-text></ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-      <div *ngIf="gas_requerido">
         <ion-text color="dark">
           <h2>Volumen de gas requerido</h2>
         </ion-text>
+        
         <ion-text color="primary" >
           <h1>{{gas_requerido}} L</h1>
         </ion-text>
-      </div>
     </ion-card-content>
   </ion-card>
 
 
 
 
-  <ion-card>
+  <ion-card *ngIf="gas_requerido">
     <ion-card-header>
       <ion-card-title>Sugerencia de equipo</ion-card-title>
       <ion-card-subtitle>Combinaciones de botellas posibles para la inmersion</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-      <div *ngIf="gas_requerido">
+      <div >
         <ion-list *ngFor="let sug of sugerencias">
           <ion-list-header>
             <ion-label color="primary">{{sug['volumen_total']}} L</ion-label>
@@ -117,9 +116,9 @@
           <ion-item *ngFor="let botella of sug['botellas'];let i=index">
             <ion-label>
               <h2>{{botella.descripcion}}</h2>
-              <p>{{botella.capacidad}} L / Carga: 200 bar</p>
             </ion-label>
-            <ion-badge  slot="end">{{botella['presion']}} bar</ion-badge>
+            <ion-badge  slot="end">{{botella.capacidad}} L</ion-badge>
+            <ion-badge  slot="end">{{botella.presion}} bar</ion-badge>
           </ion-item>
 
         </ion-list>
