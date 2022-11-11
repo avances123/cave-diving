@@ -1,17 +1,133 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title> Tercios Basico </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Tercios Basico</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <form [formGroup]="ionicForm" (ngSubmit)="calcular()" novalidate>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Datos Necesarios</ion-card-title>
+        <ion-card-subtitle>
+          Se necesitan datos personales y de la inmersion a calcular
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item fill="solid">
+          <ion-label position="floating">RMV personal [l/min]</ion-label>
+          <ion-input [(ngModel)]="rmv" name="rmv" formControlName="rmv" type="number" required></ion-input>
+          <ion-note slot="error" *ngIf="isSubmitted && errorControl.rmv.errors?.required">Campo obligatorio</ion-note>
+        </ion-item>
+
+        <ion-item fill="solid">
+          <ion-label position="floating">Profundidad [m]</ion-label>
+          <ion-input [(ngModel)]="profundidad" formControlName="profundidad" name="profundidad" required type="number"></ion-input>
+          <ion-note slot="error" *ngIf="isSubmitted && errorControl.profundidad.errors?.required">Campo obligatorio</ion-note>
+        </ion-item>
+
+        <ion-segment [ngModelOptions]="{standalone: true}" [(ngModel)]="input_tiempo">
+          <ion-segment-button value="tiempo">
+            <ion-label>Tiempo</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="distancia">
+            <ion-label>Distancia</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+
+        <div [ngSwitch]="input_tiempo">
+          <ion-item-group *ngSwitchCase="'distancia'">
+            <ion-item fill="solid">
+              <ion-label position="floating">Distancia de ida [m]</ion-label>
+              <ion-input  name="distancia" formControlName="distancia" (change)="updateTiempo()" [(ngModel)]="distancia" type="number"></ion-input>
+              <ion-note slot="error" *ngIf="isSubmitted && errorControl.distancia.errors?.required">Campo obligatorio</ion-note>
+            </ion-item>
+            <ion-item fill="solid">
+              <ion-label position="floating">Velocidad de aleteo [m/min]</ion-label>
+              <ion-input  name="velocidad" formControlName="velocidad" (change)="updateTiempo()" [(ngModel)]="velocidad" type="number"></ion-input>
+              <ion-note slot="error" *ngIf="isSubmitted && errorControl.velocidad.errors?.required">Campo obligatorio</ion-note>
+
+            </ion-item>
+          </ion-item-group>
+
+
+          <ion-item *ngSwitchCase="'tiempo'" fill="solid">
+            <ion-label position="floating">Tiempo de ida [min]</ion-label>
+            <ion-input  name="tiempo" formControlName="tiempo" [(ngModel)]="tiempo" required type="number"></ion-input>
+            <ion-note slot="error" *ngIf="isSubmitted && errorControl.tiempo.errors?.required">Campo obligatorio</ion-note>
+
+          </ion-item>
+        </div>
+
+
+
+      </ion-card-content>
+    </ion-card>
+
+
+
+
+
+    <ion-button type="submit" expand="block" fill="clear" shape="round">
+      Calcular Gas
+    </ion-button>
+  </form>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Resultado</ion-card-title>
+      <ion-card-subtitle>Datos calculados utiles para planificar la inmersion</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div *ngIf="gas_requerido">
+        <ion-text color="dark">
+          <h2>Volumen de gas requerido</h2>
+        </ion-text>
+        <ion-text color="primary" >
+          <h1>{{gas_requerido}} L</h1>
+        </ion-text>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Sugerencia de equipo</ion-card-title>
+      <ion-card-subtitle>Combinaciones de botellas posibles para la inmersion</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div *ngIf="gas_requerido">
+        <ion-list *ngFor="let sug of sugerencias">
+          <ion-list-header>
+            <ion-label color="primary">{{sug['volumen_total']}} L</ion-label>
+            <ion-button>Usar</ion-button>
+          </ion-list-header>
+          <ion-item *ngFor="let botella of sug['botellas'];let i=index">
+            <ion-label>
+              <h2>{{botella.descripcion}}</h2>
+              <p>{{botella.capacidad}} L / Carga: 200 bar</p>
+            </ion-label>
+            <ion-badge  slot="end">{{botella['presion']}} bar</ion-badge>
+          </ion-item>
+
+        </ion-list>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+
+
+
 </ion-content>
