@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
 import { FormGroup, FormBuilder, Validators, ValidationErrors, ValidatorFn, AbstractControl } from "@angular/forms";
 
 
@@ -7,8 +9,8 @@ import { FormGroup, FormBuilder, Validators, ValidationErrors, ValidatorFn, Abst
   templateUrl: 'sugerenciagas.page.html',
   styleUrls: ['sugerenciagas.page.scss']
 })
-export class SugerenciaGasPage
- {
+export class SugerenciaGasPage {
+  @ViewChild(IonModal) modal: IonModal;
 
   input_tiempo = 'tiempo';
   rmv: number = 20;
@@ -19,6 +21,8 @@ export class SugerenciaGasPage
   gas_requerido: number;
   ionicForm: FormGroup;
   isSubmitted = false;
+  sugerencias =  [];
+
 
   constructor(public formBuilder: FormBuilder) {
     this.ionicForm = this.formBuilder.group({
@@ -53,12 +57,12 @@ export class SugerenciaGasPage
     }
 
     this.gas_requerido = 3 * ( this.tiempo * this.rmv * ((this.profundidad / 10) +1 ))
-    
+    this.sugerencias = this.calcularSugerencias();
   }
 
 
 
-  get sugerencias() {
+  calcularSugerencias() {
 
     var result = [];
     const botellas = [
@@ -85,12 +89,14 @@ export class SugerenciaGasPage
       }
       result.push(combinacion)
     }
-
+    console.log('Sugerencia:' + result);
     return result;
   }
 
 
-
+  cancelModal() {
+    this.modal.dismiss(null, 'cancel');
+  }
 
   get errorControl() {
     return this.ionicForm.controls;
