@@ -3,11 +3,12 @@ import { FormGroup, FormBuilder, Validators, ValidationErrors, ValidatorFn, Abst
 
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-sugerenciagas',
+  templateUrl: 'sugerenciagas.page.html',
+  styleUrls: ['sugerenciagas.page.scss']
 })
-export class Tab1Page {
+export class SugerenciaGasPage
+ {
 
   input_tiempo = 'tiempo';
   rmv: number = 20;

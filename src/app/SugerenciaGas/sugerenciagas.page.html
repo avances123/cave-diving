@@ -1,8 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Tercios Basico </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Tercios Basico</ion-title>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
@@ -12,6 +16,20 @@
   </ion-header>
 
   <form [formGroup]="ionicForm" (ngSubmit)="calcular()" novalidate>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Regla de los tercios </ion-card-title>
+        <ion-card-subtitle>
+          Calculo de gas para penetracion en cueva
+        </ion-card-subtitle>
+        
+      </ion-card-header>
+      <ion-card-content>
+        Con los datos que escribas sobre la inmersion que quieres hacer, hasta donde quieres penetrar o cuanto quieres estar en el viaje de ida, y la profundidad media de la inmersion, la app te sugerira configuraciones tipicas de buceo en abierto aptas para la inmersion
+      </ion-card-content>
+    </ion-card>
+
+
     <ion-card>
       <ion-card-header>
         <ion-card-title>Datos Necesarios</ion-card-title>
