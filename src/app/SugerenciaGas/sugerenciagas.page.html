@@ -44,7 +44,9 @@
           <ion-note slot="error" *ngIf="isSubmitted && errorControl.profundidad.errors?.required">Campo obligatorio</ion-note>
         </ion-item>
 
-        <ion-segment [ngModelOptions]="{standalone: true}" [(ngModel)]="input_tiempo">
+
+
+        <ion-segment [ngModelOptions]="{standalone: true}" [(ngModel)]="input_tiempo" style="margin-top: 3em;">
           <ion-segment-button value="tiempo">
             <ion-label>Tiempo</ion-label>
           </ion-segment-button>
@@ -83,12 +85,22 @@
     </ion-card>
 
 
+    <ion-item>
+      <ion-icon slot="start" icon="calculator"></ion-icon>
+
+      <ion-select interface="action-sheet" placeholder="Elegir Algoritmo">
+        <ion-select-option value="tercios">Tercios Basico</ion-select-option>
+        <ion-select-option value="gue">GUE</ion-select-option>
+        <ion-select-option value="cdg">CDG</ion-select-option>
+        <ion-select-option value="cuartos">Cuartos Basico</ion-select-option>
+      </ion-select>
+      <ion-button type="submit" expand="block" fill="clear" shape="round">
+        Calcular Gas
+      </ion-button>
+    </ion-item>
 
 
 
-    <ion-button type="submit" expand="block" fill="clear" shape="round">
-      Calcular Gas
-    </ion-button>
   </form>
 
   <ion-card *ngIf="gas_requerido">
@@ -147,12 +159,15 @@
           <ion-buttons slot="end">
             <ion-button (click)="cancelModal()">Cerrar</ion-button>
           </ion-buttons>
-          <ion-title>Sobre la regla de los tercios</ion-title>
+          <ion-title>Ayuda</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
+        <h2>Sobre la regla de los tercios</h2>
+        <p>
           Con los datos que escribas sobre la inmersion que quieres hacer, hasta donde quieres penetrar o cuanto quieres estar en el viaje de ida, y la profundidad media de la inmersion,
           la app te sugerira configuraciones tipicas de buceo en abierto aptas para la inmersion.
+        </p>
       </ion-content>
     </ng-template>
   </ion-modal>

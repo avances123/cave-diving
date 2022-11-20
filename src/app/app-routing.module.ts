@@ -4,12 +4,16 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'gas/Sugerir',
+    redirectTo: 'gas/sugerir',
     pathMatch: 'full'
   },
   {
-    path: 'gas/:id',
+    path: 'gas/sugerir',
     loadChildren: () => import('./SugerenciaGas/sugerenciagas.module').then( m => m.SugerenciaGasPageModule)
+  },
+  {
+    path: 'gas/penetracion',
+    loadChildren: () => import('./CalculoPenetracion/calculopenetracion.module').then( m => m.CalculoPenetracionPageModule)
   }
 ];
 

@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'cave-diver',
+  appId: 'xyz.fabio.cavediver',
+  appName: 'Cave Diver',
   webDir: 'www',
   bundledWebRuntime: false
 };

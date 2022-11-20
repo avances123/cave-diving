@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
 import { FormGroup, FormBuilder, Validators, ValidationErrors, ValidatorFn, AbstractControl } from "@angular/forms";
 
 
@@ -79,7 +78,7 @@ export class SugerenciaGasPage {
       }
 
       if (combinacion.volumen_total < this.gas_requerido) {
-        for (let j = 0; j < 10; j++) {
+        for (let j = 0; j < 5; j++) {
           combinacion.volumen_total += 11.1 * 200;
           combinacion.botellas.push(botellas[1])
           if (combinacion.volumen_total > this.gas_requerido) {

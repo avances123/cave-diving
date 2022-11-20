@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { IonModal } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators, ValidationErrors, ValidatorFn, AbstractControl } from "@angular/forms";
+
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: 'app-calculopenetracion',
+  templateUrl: 'calculopenetracion.page.html',
+  styleUrls: ['calculopenetracion.page.scss']
 })
-export class Tab2Page {
+export class CalculoPenetracionPage {
+  @ViewChild(IonModal) modal: IonModal;
 
   gas_disponible: number = 0;
   botellas_fondo = [{'capacidad':12, 'presion_trabajo':200},{'capacidad':12, 'presion_trabajo':200}];
@@ -30,5 +34,4 @@ export class Tab2Page {
     this.botellas.forEach( botella => this.gas_disponible += botella['capacidad'] * botella['presion_trabajo'])
     console.log(this.gas_disponible)
   }
-
 }

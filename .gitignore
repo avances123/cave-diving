@@ -32,3 +32,5 @@ npm-debug.log*
 /plugins
 /www
 /android
+keystore.jks
+private_key.pepk
