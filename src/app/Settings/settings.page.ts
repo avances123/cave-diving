@@ -21,7 +21,7 @@ export class SettingsPage implements OnInit{
   velocidad_dpv: number;
   velocidad_aleteo: number;
 
-  constructor(public formBuilder: FormBuilder, private router: Router, public settingsService: SettingsService) {
+  constructor(public formBuilder: FormBuilder, private router: Router, private settingsService: SettingsService) {
     this.init();
   }
 

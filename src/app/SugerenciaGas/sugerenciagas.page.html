@@ -61,7 +61,7 @@
 
           <ion-item *ngSwitchCase="'tiempo'" fill="solid">
             <ion-label position="floating">Tiempo de ida [min]</ion-label>
-            <ion-input  name="tiempo" formControlName="tiempo" [(ngModel)]="tiempo" required type="number"></ion-input>
+            <ion-input  name="tiempo" formControlName="tiempo" (change)="updateDistancia()" [(ngModel)]="tiempo" required type="number"></ion-input>
             <ion-note slot="error" *ngIf="isSubmitted && errorControl.tiempo.errors?.required">Campo obligatorio</ion-note>
 
           </ion-item>

@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonModal } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators, ValidationErrors, ValidatorFn, AbstractControl } from "@angular/forms";
+import { SettingsService } from '../Settings/settings.service';
 
 
 @Component({
@@ -14,7 +15,10 @@ export class SugerenciaGasPage {
   input_tiempo = 'tiempo';
   rmv: number = 20;
   profundidad: number;
-  velocidad: number = 10;
+  velocidad_aleteo: number;
+  velocidad_dpv: number;
+  velocidad: number;
+  usar_dpv: boolean;
   distancia: number;
   tiempo: number;
   gas_requerido: number;
@@ -23,7 +27,10 @@ export class SugerenciaGasPage {
   sugerencias =  [];
 
 
-  constructor(public formBuilder: FormBuilder) {
+  constructor(public formBuilder: FormBuilder, private settingsService: SettingsService) {
+
+    this.init();
+
     this.ionicForm = this.formBuilder.group({
       profundidad: [this.profundidad, [Validators.required]],
       tiempo: [this.tiempo, [Validators.required]],
@@ -32,12 +39,27 @@ export class SugerenciaGasPage {
   }
 
 
+  async init(){
+    this.rmv = await this.settingsService.get('rmv') || 20;
+    this.velocidad_aleteo = await this.settingsService.get('velocidad_aleteo') || 10;
+    this.velocidad_dpv = await this.settingsService.get('velocidad_dpv') || 30;
+    this.usar_dpv = await this.settingsService.get('usar_dpv') || false;
+    this.velocidad = this.usar_dpv ? this.velocidad_dpv : this.velocidad_aleteo ;
+  }
 
 
   updateTiempo() {
     if (this.distancia && this.velocidad){
       console.log(this.tiempo ,this.distancia, this.velocidad);
       this.tiempo = this.distancia / this.velocidad;
+    }
+    this.calcular()
+  }
+
+  updateDistancia() {
+    if (this.tiempo && this.velocidad){
+      console.log(this.tiempo ,this.distancia, this.velocidad);
+      this.distancia = this.tiempo * this.velocidad;
     }
     this.calcular()
   }
@@ -53,7 +75,7 @@ export class SugerenciaGasPage {
       console.log(this.ionicForm.value)
     }
 
-    this.gas_requerido = 3 * ( this.tiempo * this.rmv * ((this.profundidad / 10) +1 ))
+    this.gas_requerido = 3 * ( this.tiempo * this.rmv * ((this.profundidad / 10) + 1 ))
     this.sugerencias = this.calcularSugerencias();
   }
 
