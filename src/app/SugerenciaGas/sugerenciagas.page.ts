@@ -12,13 +12,15 @@ import { SettingsService } from '../Settings/settings.service';
 export class SugerenciaGasPage {
   @ViewChild(IonModal) modal: IonModal;
 
-  input_tiempo = 'tiempo';
+  
   rmv: number = 20;
-  profundidad: number;
   velocidad_aleteo: number;
   velocidad_dpv: number;
   velocidad: number;
   usar_dpv: boolean;
+  
+  profundidad: number;
+  input_tiempo = 'tiempo';
   distancia: number;
   tiempo: number;
   gas_requerido: number;

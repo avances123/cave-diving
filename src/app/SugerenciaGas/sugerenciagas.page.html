@@ -87,7 +87,7 @@
         <ion-select-option value="cdg">CDG</ion-select-option>
         <ion-select-option value="cuartos">Cuartos Basico</ion-select-option>
       </ion-select> -->
-      <ion-button type="submit" expand="block" fill="clear" shape="round">
+      <ion-button type="submit" expand="block"  style="margin: 10px; margin-top: 20px;">
         Calcular Gas
       </ion-button>
 
@@ -126,7 +126,7 @@
         <ion-list *ngFor="let sug of sugerencias">
           <ion-list-header>
             <ion-label color="primary">{{sug['volumen_total']}} L</ion-label>
-            <ion-button>Usar ></ion-button>
+            <ion-button>Usar</ion-button>
           </ion-list-header>
           <ion-item *ngFor="let botella of sug['botellas'];let i=index">
             <ion-label>

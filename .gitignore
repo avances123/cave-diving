@@ -34,3 +34,7 @@ npm-debug.log*
 /android
 keystore.jks
 private_key.pepk
+output.zip
+pepk.jar
+
+
