@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'gas/sugerir',
+    redirectTo: 'settings',
     pathMatch: 'full'
   },
   {
@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'gas/penetracion',
     loadChildren: () => import('./CalculoPenetracion/calculopenetracion.module').then( m => m.CalculoPenetracionPageModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./Settings/settings.module').then( m => m.SettingsPageModule)
   }
 ];
 

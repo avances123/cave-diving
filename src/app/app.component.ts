@@ -9,6 +9,8 @@ export class AppComponent {
     { title: 'Sugerir Gas OC', url: '/gas/sugerir', icon: 'color-wand' },
     { title: 'Calcular Penetracion', url: '/gas/penetracion', icon: 'walk' },
   ];
-  public labels = ['cosita 1', 'cosita 2'];
+  public personalPages = [
+    { title: 'Datos Personales', url: '/settings', icon: 'settings' },
+  ];
   constructor() {}
 }

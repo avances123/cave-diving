@@ -1,0 +1,102 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Configuracion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Configuracion</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+
+
+  <form [formGroup]="ionicForm" (ngSubmit)="guardar()" novalidate *ngIf="true">
+    
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>RMV Personal</ion-card-title>
+        <p>
+          Cuantos litros de gas por minuto respiras? Es el famoso dato de consumo que debemos conocer, ya bien por experiencia o por fruto de un analisis de nuestro logbook. 
+        </p>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item fill="solid">
+          <ion-label position="floating">RMV personal [l/min]</ion-label>
+          <ion-input [(ngModel)]="rmv" name="rmv" formControlName="rmv" type="number" required></ion-input>
+          <ion-note slot="error" *ngIf="isSubmitted && errorControl.rmv.errors?.required">Campo obligatorio</ion-note>
+        </ion-item>
+
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Velocidad Aleteando</ion-card-title>
+        <p>
+          Cuantos metros avanzas en 1 minuto buceando? Aqui debe ir el dato de la velocidad con todo el equipo que planeas llevar, no es lo mismo bucear con 2 botellas que con 4.
+        </p>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item fill="solid">
+          <ion-label position="floating">Velocidad Aleteo [m/min]</ion-label>
+          <ion-input [(ngModel)]="velocidad_aleteo" formControlName="velocidad_aleteo" name="velocidad_aleteo" required type="number"></ion-input>
+          <ion-note slot="error" *ngIf="isSubmitted && errorControl.velocidad_aleteo.errors?.required">Campo obligatorio</ion-note>
+        </ion-item>
+
+      </ion-card-content>
+    </ion-card>
+
+
+    <ion-card>
+      <ion-card-header>
+        
+        <ion-card-title>Velocidad con Scooter</ion-card-title>
+
+        <p>
+          Cuantos metros avanzas en 1 minuto con tu scooter? Aqui debe ir el dato de la velocidad con todo el equipo que planeas llevar, no es lo mismo bucear con 2 botellas que con 4.
+        </p>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Usar DPV en los calculos?</ion-label>
+          <ion-toggle [enableOnOffLabels]="true" [(ngModel)]="usar_dpv" [ngModelOptions]="{standalone: true}" slot="end"></ion-toggle>
+        </ion-item>
+        <ion-item fill="solid" *ngIf="usar_dpv">
+          <ion-label position="floating">Velocidad con DPV [m/min]</ion-label>
+          <ion-input [(ngModel)]="velocidad_dpv" formControlName="velocidad_dpv" name="velocidad_dpv" required type="number"></ion-input>
+          <ion-note slot="error" *ngIf="isSubmitted && errorControl.velocidad_dpv.errors?.required">Campo obligatorio</ion-note>
+        </ion-item>
+
+      </ion-card-content>
+    </ion-card>
+
+
+    <div id="container_boton">
+      <ion-button type="submit" expand="block">Guardar</ion-button>
+    </div>
+
+  </form>
+
+  <ng-template #loading>
+    Loading User...
+  </ng-template>
+  
+
+
+
+
+
+</ion-content>
