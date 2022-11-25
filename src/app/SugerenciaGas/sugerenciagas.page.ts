@@ -24,6 +24,7 @@ export class SugerenciaGasPage {
   gas_requerido: number;
   ionicForm: FormGroup;
   isSubmitted = false;
+  resultadoPintado = false;
   sugerencias =  [];
 
 
@@ -77,6 +78,7 @@ export class SugerenciaGasPage {
 
     this.gas_requerido = 3 * ( this.tiempo * this.rmv * ((this.profundidad / 10) + 1 ))
     this.sugerencias = this.calcularSugerencias();
+    this.resultadoPintado = true;
   }
 
 
