@@ -16,7 +16,7 @@ export class CalculoPenetracionPage {
   velocidad_aleteo: number;
   velocidad_dpv: number;
   velocidad: number;
-  usar_dpv: boolean;
+  usar_dpv: boolean = false;
 
   botellas_fondo = [{'capacidad':12, 'presion':200},{'capacidad':12, 'presion':200}];
   botellas_etapas = [];
@@ -25,6 +25,7 @@ export class CalculoPenetracionPage {
   gas_disponible: number = 0;
   tiempo_trabajo: number;
   penetracion_maxima: number;
+  presion_retorno:number;
   resultadoPintado = false;
 
   constructor(private settingsService: SettingsService) {
@@ -37,8 +38,6 @@ export class CalculoPenetracionPage {
     this.rmv = await this.settingsService.get('rmv') || 20;
     this.velocidad_aleteo = await this.settingsService.get('velocidad_aleteo') || 10;
     this.velocidad_dpv = await this.settingsService.get('velocidad_dpv') || 30;
-    this.usar_dpv = await this.settingsService.get('usar_dpv') || false;
-    this.velocidad = this.usar_dpv ? this.velocidad_dpv : this.velocidad_aleteo ;
   }
 
   onFondoClick(){
@@ -54,9 +53,10 @@ export class CalculoPenetracionPage {
   }
 
   calcular() {
-    // Sumar gas
+
+    // Sumar Gas
     this.gas_disponible = 0;
-    this.botellas.forEach( botella => this.gas_disponible += botella['capacidad'] * botella['presion'])
+    this.botellas.forEach( botella => this.gas_disponible += botella.capacidad * botella.presion )
 
     // Calcular tiempo de ida con el gas que tengo
     console.log(this.gas_disponible, this.rmv, this.profundidad);
@@ -64,7 +64,18 @@ export class CalculoPenetracionPage {
     this.tiempo_trabajo = tiempo_total / 3;
     
     // Calcular penetracion maxima, es la distancia que puedo hacer aleteando con 1/3 de gas
-    this.penetracion_maxima = this.tiempo_trabajo * this.velocidad;
+    const velocidad = this.usar_dpv ? this.velocidad_dpv : this.velocidad_aleteo ;
+    this.penetracion_maxima = this.tiempo_trabajo * velocidad;
+
+    // presion de retorno
+    let presion_acum = 0;
+    this.botellas.forEach( botella => {
+      this.gas_disponible += botella.capacidad * botella.presion;
+      presion_acum += botella.presion;
+    })
+    const presion_media = presion_acum / this.botellas.length
+    this.presion_retorno = presion_media * 2 / 3;
+
 
     this.resultadoPintado = true;
   }

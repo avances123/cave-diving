@@ -70,11 +70,7 @@
       </ion-card-header>
       
       <ion-card-content>
-        <ion-item>
-          <ion-label>Usar DPV en los calculos?</ion-label>
-          <ion-toggle [enableOnOffLabels]="true" [(ngModel)]="usar_dpv" [ngModelOptions]="{standalone: true}" slot="end"></ion-toggle>
-        </ion-item>
-        <ion-item fill="solid" *ngIf="usar_dpv">
+        <ion-item fill="solid">
           <ion-label position="floating">Velocidad con DPV [m/min]</ion-label>
           <ion-input [(ngModel)]="velocidad_dpv" formControlName="velocidad_dpv" name="velocidad_dpv" required type="number"></ion-input>
           <ion-note slot="error" *ngIf="isSubmitted && errorControl.velocidad_dpv.errors?.required">Campo obligatorio</ion-note>

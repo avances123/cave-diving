@@ -16,7 +16,6 @@ export class SettingsPage implements OnInit{
   ionicForm: FormGroup;
   isSubmitted = false;
 
-  usar_dpv = false;
   rmv: number;
   velocidad_dpv: number;
   velocidad_aleteo: number;
@@ -29,7 +28,6 @@ export class SettingsPage implements OnInit{
     this.rmv = await this.settingsService.get('rmv') || 20;
     this.velocidad_aleteo = await this.settingsService.get('velocidad_aleteo') || 10;
     this.velocidad_dpv = await this.settingsService.get('velocidad_dpv') || 30;
-    this.usar_dpv = await this.settingsService.get('usar_dpv') || false;
   }
   
   ngOnInit() {
@@ -48,7 +46,6 @@ export class SettingsPage implements OnInit{
   guardar() {
     console.log("Guardando settings:", this.settingsService)
     this.settingsService.set("rmv", this.rmv)
-    this.settingsService.set("usar_dpv", this.usar_dpv)
     this.settingsService.set("velocidad_dpv", this.velocidad_dpv)
     this.settingsService.set("velocidad_aleteo", this.velocidad_aleteo);
 

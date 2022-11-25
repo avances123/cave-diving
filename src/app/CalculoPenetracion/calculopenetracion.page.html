@@ -30,16 +30,20 @@
   <div *ngIf="!resultadoPintado">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Profundiad Media</ion-card-title>
+        <ion-card-title>Datos Necesarios</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        <p>Profundidad media a la que calculas que estaras en la cueva</p>
-
-        <ion-item fill="solid">
-          <ion-label position="floating">Profundidad [m]</ion-label>
-          <ion-input [(ngModel)]="profundidad"  name="profundidad" required type="number"></ion-input>
-        </ion-item>
+        <ion-list lines="none">
+          <ion-item fill="solid">
+            <ion-label position="floating">Profundidad Media [m]</ion-label>
+            <ion-input [(ngModel)]="profundidad"  name="profundidad" required type="number"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Usar DPV?</ion-label>
+            <ion-toggle [enableOnOffLabels]="true" [(ngModel)]="usar_dpv"  slot="end"></ion-toggle>
+          </ion-item>
+        </ion-list>
       </ion-card-content>
     </ion-card>
 
@@ -110,46 +114,62 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-text color="danger">En ningun calculo se tiene en cuenta el gas requerido para la descompresion </ion-text>
+      <!-- <ion-text color="danger">En ningun calculo se tiene en cuenta el gas requerido para la descompresion </ion-text> -->
 
       <ion-list>
         <ion-item>
           <ion-icon name="balloon-outline" size="large" slot="start"></ion-icon>
           <ion-label>
-            <h1>{{gas_disponible}}</h1>
-            <p>Volumen de gas</p>
+            <h1>{{gas_disponible}} L</h1>
+            <p>Volumen total de gas en tus botellas</p>
           </ion-label>
+
         </ion-item>
 
         <ng-container *ngIf="profundidad; else elseTemplate">
           <ion-item>
-            <ion-icon name="balloon-outline" size="large" slot="start"></ion-icon>
-            <ion-label>
-              <h1>{{tiempo_trabajo}}</h1>
-              <p>Tiempo de trabajo</p>
+            <ion-icon name="timer-outline" size="large" slot="start"></ion-icon>
+            <ion-label class="ion-text-wrap">
+              <h1>{{tiempo_trabajo | number:'1.0-0'}} min</h1>
+              <p>Tiempo disponible para entrar/trabajar antes de volver</p>
             </ion-label>
           </ion-item>
           <ion-item>
-            <ion-icon name="balloon-outline" size="large" slot="start"></ion-icon>
-            <ion-label>
-              <h1>{{penetracion_maxima}}</h1>
-              <p>Distancia Máxima</p>
+            <ion-icon name="code-working-outline" size="large" slot="start"></ion-icon>
+            <ion-label class="ion-text-wrap">
+              <h1>{{penetracion_maxima | number:'1.0-0'}} m</h1>
+              <p>Distancia máxima hasta donde llegar antes de dar la vuelta</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="speedometer-outline" size="large" slot="start"></ion-icon>
+            <ion-label class="ion-text-wrap">
+              <h1>{{presion_retorno | number:'1.0-0'}} bar</h1>
+              <p>Presion de Retorno</p>
             </ion-label>
           </ion-item>
         </ng-container>
+
         <ng-template #elseTemplate>
           <ion-item>
-            <ion-icon name="balloon-outline" size="large" slot="start"></ion-icon>
+            <ion-icon name="timer-outline" size="large" slot="start"></ion-icon>
             <ion-label>
               <ion-text color="warning">No tenemos dato de profundidad</ion-text>
               <p>Tiempo de trabajo</p>
             </ion-label>
           </ion-item>
           <ion-item>
-            <ion-icon name="balloon-outline" size="large" slot="start"></ion-icon>
+            <ion-icon name="code-working-outline" size="large" slot="start"></ion-icon>
             <ion-label>
               <ion-text color="warning">No tenemos dato de profundidad</ion-text>
               <p>Distancia Máxima</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="speedometer-outline" size="large" slot="start"></ion-icon>
+            <ion-label class="ion-text-wrap">
+              <ion-text color="warning">No tenemos dato de profundidad</ion-text>
+              <p>Presion de Retorno</p>
             </ion-label>
           </ion-item>
         </ng-template>

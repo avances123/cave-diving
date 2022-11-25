@@ -6,11 +6,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Sugerir Gas OC', url: '/gas/sugerir', icon: 'color-wand' },
-    { title: 'Calcular Penetracion', url: '/gas/penetracion', icon: 'walk' },
+    { title: 'Calcular Penetracion', url: 'penetracion', icon: 'walk' },
+    { title: 'Sugerir Gas OC', url: 'sugerir', icon: 'color-wand' },
   ];
   public personalPages = [
-    { title: 'Datos Personales', url: '/settings', icon: 'settings' },
+    { title: 'Datos Personales', url: 'settings', icon: 'settings' },
   ];
   constructor() {}
 }
