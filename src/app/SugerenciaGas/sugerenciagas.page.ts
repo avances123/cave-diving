@@ -25,11 +25,9 @@ export class SugerenciaGasPage {
 
   constructor(public formBuilder: FormBuilder) {
     this.ionicForm = this.formBuilder.group({
-      rmv: [this.rmv, [Validators.required]],
       profundidad: [this.profundidad, [Validators.required]],
       tiempo: [this.tiempo, [Validators.required]],
       distancia: [this.distancia, []],
-      velocidad: [this.velocidad, []],
    })
   }
 

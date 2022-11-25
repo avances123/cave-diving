@@ -32,15 +32,17 @@
       </ion-card-header>
 
       <ion-card-content>
+        <p>Profundidad media a la que calculas que estaras en la cueva</p>
+
         <ion-item fill="solid">
           <ion-label position="floating">Profundidad [m]</ion-label>
           <ion-input [(ngModel)]="profundidad" formControlName="profundidad" name="profundidad" required type="number"></ion-input>
           <ion-note slot="error" *ngIf="isSubmitted && errorControl.profundidad.errors?.required">Campo obligatorio</ion-note>
         </ion-item>
 
+        <p style="margin-top: 2em;">Elige cuanto tiempo de ida o de trabajo vas a gastar, o cuanto quieres penetrar en distancia</p>
 
-
-        <ion-segment [ngModelOptions]="{standalone: true}" [(ngModel)]="input_tiempo" style="margin-top: 3em;">
+        <ion-segment [ngModelOptions]="{standalone: true}" [(ngModel)]="input_tiempo" >
           <ion-segment-button value="tiempo">
             <ion-label>Tiempo</ion-label>
           </ion-segment-button>
@@ -50,13 +52,11 @@
         </ion-segment>
 
         <div [ngSwitch]="input_tiempo">
-          <ion-item-group *ngSwitchCase="'distancia'">
-            <ion-item fill="solid">
-              <ion-label position="floating">Distancia de ida [m]</ion-label>
-              <ion-input  name="distancia" formControlName="distancia" (change)="updateTiempo()" [(ngModel)]="distancia" type="number"></ion-input>
-              <ion-note slot="error" *ngIf="isSubmitted && errorControl.distancia.errors?.required">Campo obligatorio</ion-note>
-            </ion-item>
-          </ion-item-group>
+          <ion-item fill="solid" *ngSwitchCase="'distancia'">
+            <ion-label position="floating">Distancia de ida [m]</ion-label>
+            <ion-input  name="distancia" formControlName="distancia" (change)="updateTiempo()" [(ngModel)]="distancia" type="number"></ion-input>
+            <ion-note slot="error" *ngIf="isSubmitted && errorControl.distancia.errors?.required">Campo obligatorio</ion-note>
+          </ion-item>
 
 
           <ion-item *ngSwitchCase="'tiempo'" fill="solid">
@@ -73,19 +73,17 @@
     </ion-card>
 
 
-    <ion-item>
-      <ion-icon slot="start" icon="calculator"></ion-icon>
+      <!-- <ion-icon slot="start" icon="calculator"></ion-icon>
 
       <ion-select interface="action-sheet" placeholder="Elegir Algoritmo">
         <ion-select-option value="tercios">Tercios Basico</ion-select-option>
         <ion-select-option value="gue">GUE</ion-select-option>
         <ion-select-option value="cdg">CDG</ion-select-option>
         <ion-select-option value="cuartos">Cuartos Basico</ion-select-option>
-      </ion-select>
+      </ion-select> -->
       <ion-button type="submit" expand="block" fill="clear" shape="round">
         Calcular Gas
       </ion-button>
-    </ion-item>
 
 
 

@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonModal } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators, ValidationErrors, ValidatorFn, AbstractControl } from "@angular/forms";
 import { Router } from '@angular/router';
-import { SettingsService } from '../settings.service';
+import { SettingsService } from './settings.service';
 import { OnInit } from '@angular/core';
 
 @Component({
@@ -21,15 +21,15 @@ export class SettingsPage implements OnInit{
   velocidad_dpv: number;
   velocidad_aleteo: number;
 
-  constructor(public formBuilder: FormBuilder, private router: Router, public settings: SettingsService) {
+  constructor(public formBuilder: FormBuilder, private router: Router, public settingsService: SettingsService) {
     this.init();
   }
 
   async init(){
-    this.rmv = await this.settings.get('rmv') || 20;
-    this.velocidad_aleteo = await this.settings.get('velocidad_aleteo') || 10;
-    this.velocidad_dpv = await this.settings.get('velocidad_dpv') || 30;
-    this.usar_dpv = await this.settings.get('usar_dpv') || false;
+    this.rmv = await this.settingsService.get('rmv') || 20;
+    this.velocidad_aleteo = await this.settingsService.get('velocidad_aleteo') || 10;
+    this.velocidad_dpv = await this.settingsService.get('velocidad_dpv') || 30;
+    this.usar_dpv = await this.settingsService.get('usar_dpv') || false;
   }
   
   ngOnInit() {
@@ -46,11 +46,11 @@ export class SettingsPage implements OnInit{
 
 
   guardar() {
-    console.log("Guardando settings:", this.settings)
-    this.settings.set("rmv", this.rmv)
-    this.settings.set("usar_dpv", this.usar_dpv)
-    this.settings.set("velocidad_dpv", this.velocidad_dpv)
-    this.settings.set("velocidad_aleteo", this.velocidad_aleteo);
+    console.log("Guardando settings:", this.settingsService)
+    this.settingsService.set("rmv", this.rmv)
+    this.settingsService.set("usar_dpv", this.usar_dpv)
+    this.settingsService.set("velocidad_dpv", this.velocidad_dpv)
+    this.settingsService.set("velocidad_aleteo", this.velocidad_aleteo);
 
     this.router.navigate(['gas/sugerir']);
   }
