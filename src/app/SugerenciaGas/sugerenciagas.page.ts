@@ -23,6 +23,7 @@ export class SugerenciaGasPage {
   input_tiempo = 'tiempo';
   distancia: number;
   tiempo: number;
+  algoritmo: string;
   gas_requerido: number;
   ionicForm: FormGroup;
   isSubmitted = false;
@@ -38,6 +39,7 @@ export class SugerenciaGasPage {
       profundidad: [this.profundidad, [Validators.required]],
       tiempo: [this.tiempo, [Validators.required]],
       distancia: [this.distancia, []],
+      algoritmo: [this.algoritmo, [Validators.required]],
    })
   }
 
@@ -56,7 +58,6 @@ export class SugerenciaGasPage {
       console.log(this.tiempo ,this.distancia, this.velocidad);
       this.tiempo = this.distancia / this.velocidad;
     }
-    this.calcular()
   }
 
   updateDistancia() {
@@ -64,21 +65,34 @@ export class SugerenciaGasPage {
       console.log(this.tiempo ,this.distancia, this.velocidad);
       this.distancia = this.tiempo * this.velocidad;
     }
-    this.calcular()
   }
 
   calcular() {
     this.isSubmitted = true;
 
-    console.log(this.ionicForm)
     if (!this.ionicForm.valid) {
       console.log('Please provide all the required values!')
+      console.log(this.ionicForm)
       return false;
     } else {
       console.log(this.ionicForm.value)
     }
 
-    this.gas_requerido = 3 * ( this.tiempo * this.rmv * ((this.profundidad / 10) + 1 ))
+    switch (this.algoritmo) {
+      case 'tercios':
+        this.gas_requerido = 3 * ( this.tiempo * this.rmv * ((this.profundidad / 10) + 1 ))    
+        break;
+      case 'cuartos':
+        this.gas_requerido = 4 * ( this.tiempo * this.rmv * ((this.profundidad / 10) + 1 ))    
+        break;
+      case 'gue':
+        this.gas_requerido = 3 * ( this.tiempo * this.rmv * ((this.profundidad / 10) + 1 ))    
+        break;
+      default:
+        break;
+    }
+
+    
     this.sugerencias = this.calcularSugerencias();
     this.resultadoPintado = true;
   }

@@ -6,8 +6,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Calcular Penetracion', url: 'penetracion', icon: 'walk' },
-    { title: 'Sugerir Gas OC', url: 'sugerir', icon: 'color-wand' },
+    { title: 'Tiempo/Distancia', url: 'penetracion', icon: 'walk' },
+    { title: 'Gas', url: 'sugerir', icon: 'color-wand' },
+    { title: 'Blender', url: 'blender', icon: 'sync' },
   ];
   public personalPages = [
     { title: 'Datos Personales', url: 'settings', icon: 'settings' },

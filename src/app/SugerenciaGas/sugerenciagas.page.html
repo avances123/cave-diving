@@ -5,11 +5,11 @@
     </ion-buttons>
     <ion-buttons slot="secondary">
 
-      <ion-button id="back" *ngIf="!resultadoPintado">
+      <ion-button id="open-modal" >
         <ion-icon  slot="icon-only" name="help"  ></ion-icon>
       </ion-button>
 
-      <ion-button id="open-modal"  *ngIf="resultadoPintado" (click)="resultadoPintado=false">
+      <ion-button  *ngIf="resultadoPintado" (click)="resultadoPintado=false">
         <ion-icon  slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
 
@@ -39,59 +39,46 @@
 
       <ion-card-content>
         <p>Profundidad media a la que calculas que estaras en la cueva</p>
-
         <ion-item fill="solid">
           <ion-label position="floating">Profundidad [m]</ion-label>
           <ion-input [(ngModel)]="profundidad" formControlName="profundidad" name="profundidad" required type="number"></ion-input>
           <ion-note slot="error" *ngIf="isSubmitted && errorControl.profundidad.errors?.required">Campo obligatorio</ion-note>
         </ion-item>
 
-        <p style="margin-top: 2em;">Elige cuanto tiempo de ida o de trabajo vas a gastar, o cuanto quieres penetrar en distancia</p>
-
-        <ion-segment [ngModelOptions]="{standalone: true}" [(ngModel)]="input_tiempo" >
-          <ion-segment-button value="tiempo">
-            <ion-label>Tiempo</ion-label>
-          </ion-segment-button>
-          <ion-segment-button value="distancia">
-            <ion-label>Penetracion</ion-label>
-          </ion-segment-button>
-        </ion-segment>
-
-        <div [ngSwitch]="input_tiempo">
-          <ion-item fill="solid" *ngSwitchCase="'distancia'">
-            <ion-label position="floating">Distancia de ida [m]</ion-label>
-            <ion-input  name="distancia" formControlName="distancia" (change)="updateTiempo()" [(ngModel)]="distancia" type="number"></ion-input>
-            <ion-note slot="error" *ngIf="isSubmitted && errorControl.distancia.errors?.required">Campo obligatorio</ion-note>
-          </ion-item>
+        <!-- <p style="margin-top: 2em;">Escribe cuanto quieres penetrar en distancia</p>
+        <ion-item fill="solid" >
+          <ion-label position="floating">Distancia de ida [m]</ion-label>
+          <ion-input  name="distancia" formControlName="distancia" (keyup)="updateTiempo()" [(ngModel)]="distancia" type="number"></ion-input>
+          <ion-note slot="error" *ngIf="isSubmitted && errorControl.distancia.errors?.required">Campo obligatorio</ion-note>
+        </ion-item> -->
 
 
-          <ion-item *ngSwitchCase="'tiempo'" fill="solid">
-            <ion-label position="floating">Tiempo de ida [min]</ion-label>
-            <ion-input  name="tiempo" formControlName="tiempo" (change)="updateDistancia()" [(ngModel)]="tiempo" required type="number"></ion-input>
-            <ion-note slot="error" *ngIf="isSubmitted && errorControl.tiempo.errors?.required">Campo obligatorio</ion-note>
 
-          </ion-item>
-        </div>
-
-
+        <p style="margin-top: 2em;">Elige cuanto tiempo de ida o de trabajo vas a gastar</p>
+        <ion-item  fill="solid">
+          <ion-label position="floating">Tiempo de ida [min]</ion-label>
+          <!-- <ion-input  name="tiempo" formControlName="tiempo" (keyup)="updateDistancia()" [(ngModel)]="tiempo" required type="number"></ion-input> -->
+          <ion-input  name="tiempo" formControlName="tiempo"  [(ngModel)]="tiempo" required type="number"></ion-input>
+          <ion-note slot="error" *ngIf="isSubmitted && errorControl.tiempo.errors?.required">Campo obligatorio</ion-note>
+        </ion-item>
 
       </ion-card-content>
     </ion-card>
 
-
-      <!-- <ion-icon slot="start" icon="calculator"></ion-icon>
-
-      <ion-select interface="action-sheet" placeholder="Elegir Algoritmo">
-        <ion-select-option value="tercios">Tercios Basico</ion-select-option>
-        <ion-select-option value="gue">GUE</ion-select-option>
-        <ion-select-option value="cdg">CDG</ion-select-option>
-        <ion-select-option value="cuartos">Cuartos Basico</ion-select-option>
-      </ion-select> -->
-      <ion-button type="submit" expand="block"  style="margin: 10px; margin-top: 20px;">
+    <div style="margin: 10px; margin-top: 20px;">
+      <ion-item >
+        <ion-icon slot="end" icon="calculator"></ion-icon>
+        <ion-select [(ngModel)]="algoritmo" interface="action-sheet" placeholder="Elegir Algoritmo" name="algoritmo" formControlName="algoritmo" required >
+          <ion-select-option value="tercios">Tercios Basico</ion-select-option>
+          <ion-select-option value="cuartos">Cuartos Basico</ion-select-option>
+          <ion-select-option value="gue">GUE</ion-select-option>
+        </ion-select>
+        <ion-note slot="error" *ngIf="isSubmitted && errorControl.algoritmo.errors?.required">Campo obligatorio</ion-note>
+      </ion-item>
+      <ion-button type="submit" expand="block"  style="margin-top: 20px;">
         Calcular Gas
       </ion-button>
-
-
+    </div>
 
   </form>
 
