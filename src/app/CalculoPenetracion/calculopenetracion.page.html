@@ -5,23 +5,23 @@
     </ion-buttons>
     <ion-buttons slot="secondary">
 
-      <ion-button id="back" *ngIf="!resultadoPintado">
+      <ion-button id="open-modal" *ngIf="!resultadoPintado">
         <ion-icon  slot="icon-only" name="help"  ></ion-icon>
       </ion-button>
 
-      <ion-button id="open-modal"  *ngIf="resultadoPintado" (click)="resultadoPintado=false">
+      <ion-button id="back"  *ngIf="resultadoPintado" (click)="resultadoPintado=false">
         <ion-icon  slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
 
     </ion-buttons>
-    <ion-title>Calcular Presion de Retorno</ion-title>
+    <ion-title>Calcular Penetración</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Calcular Presion de Retorno</ion-title>
+      <ion-title size="large">Calcular Penetración</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -42,6 +42,10 @@
           </ion-item>
           <ion-item>
             <ion-label>Usar DPV?</ion-label>
+            <ion-toggle [enableOnOffLabels]="true" [(ngModel)]="usar_dpv"  slot="end"></ion-toggle>
+          </ion-item>
+          <ion-item>
+            <ion-label>Solo diving?</ion-label>
             <ion-toggle [enableOnOffLabels]="true" [(ngModel)]="usar_dpv"  slot="end"></ion-toggle>
           </ion-item>
         </ion-list>
@@ -102,9 +106,22 @@
       </ion-card-content>
     </ion-card>
 
-    <ion-button (click)="calcular()" expand="block"  style="margin: 10px; margin-top: 20px;">
-      Calcular Inmersion 
-    </ion-button>
+
+
+    <div style="margin: 10px; margin-top: 20px;">
+      <ion-item >
+        <ion-icon slot="end" icon="calculator"></ion-icon>
+        <ion-select [(ngModel)]="algoritmo" interface="action-sheet" placeholder="Elegir Algoritmo" name="algoritmo" required >
+          <ion-select-option value="tercios">Tercios Basico</ion-select-option>
+          <ion-select-option value="cuartos">Cuartos Basico</ion-select-option>
+          <ion-select-option value="gue">GUE</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button (click)="calcular()" expand="block"  style="margin: 10px; margin-top: 20px;" [disabled]="!profundidad">
+        Calcular Inmersion 
+      </ion-button>
+    </div>
 
   </div>
 
@@ -129,7 +146,7 @@
 
         <ng-container *ngIf="profundidad; else elseTemplate">
           <ion-item>
-            <ion-icon name="timer-outline" size="large" slot="start"></ion-icon>
+            <ion-icon name="time-outline" size="large" slot="start"></ion-icon>
             <ion-label class="ion-text-wrap">
               <h1>{{tiempo_trabajo | number:'1.0-0'}} min</h1>
               <p>Tiempo disponible para entrar/trabajar antes de volver</p>
@@ -153,7 +170,7 @@
 
         <ng-template #elseTemplate>
           <ion-item>
-            <ion-icon name="timer-outline" size="large" slot="start"></ion-icon>
+            <ion-icon name="time-outline" size="large" slot="start"></ion-icon>
             <ion-label>
               <ion-text color="warning">No tenemos dato de profundidad</ion-text>
               <p>Tiempo de trabajo</p>
@@ -174,14 +191,33 @@
             </ion-label>
           </ion-item>
         </ng-template>
-        
-
-
+      
       </ion-list>
 
     </ion-card-content>
   </ion-card>
 
+  <ion-modal trigger="open-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancelModal()">Cerrar</ion-button>
+          </ion-buttons>
+          <ion-title>Ayuda</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <p>
+          Con los datos que escribas sobre la inmersion que quieres hacer la app te sugerira configuraciones tipicas de buceo en abierto aptas para la inmersion. 
+          Ademas debes elegir el algoritmo para planificacion de gases que mas te apetezca, con este algoritmo, te sugeriremos que botellas necesitas para cumplirlo.
+        </p>
 
+
+    
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 
 </ion-content>

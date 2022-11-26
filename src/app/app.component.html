@@ -6,8 +6,8 @@
         <ion-note>La app para buceo en cuevas</ion-note>
 
         <ion-list id="inbox-list">
-          <ion-list-header> Planificacion Gas</ion-list-header>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+          <ion-list-header> Ida y Vuelta simple</ion-list-header>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of idaYVueltaPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
@@ -15,6 +15,15 @@
           </ion-menu-toggle>
         </ion-list>
 
+        <ion-list id="inbox-list">
+          <ion-list-header>Inmersion de trabajo</ion-list-header>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of trabajoPages; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
 
         <ion-list id="labels-list">
           <ion-list-header>Personal</ion-list-header>

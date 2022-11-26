@@ -26,12 +26,11 @@ export class CalculoPenetracionPage {
   penetracion_maxima: number;
   presion_retorno:number;
   resultadoPintado = false;
+  algoritmo: string;
 
   constructor(private settingsService: SettingsService) {
     this.init()
   }
-
-
 
   async init(){
     this.sac = await this.settingsService.get('sac') || 20;
@@ -51,6 +50,10 @@ export class CalculoPenetracionPage {
     return [...this.botellas_fondo, ...this.botellas_etapas];
   }
 
+  cancelModal() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
   calcular() {
 
     // Sumar Gas
@@ -68,10 +71,7 @@ export class CalculoPenetracionPage {
 
     // presion de retorno
     let presion_acum = 0;
-    this.botellas.forEach( botella => {
-      this.gas_disponible += botella.capacidad * botella.presion;
-      presion_acum += botella.presion;
-    })
+    this.botellas.forEach( botella => presion_acum += botella.presion )
     const presion_media = presion_acum / this.botellas.length
     this.presion_retorno = presion_media * 2 / 3;
 

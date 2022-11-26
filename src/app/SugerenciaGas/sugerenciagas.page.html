@@ -94,7 +94,7 @@
         </ion-text>
         
         <ion-text color="primary" >
-          <h1>{{gas_requerido}} L</h1>
+          <h1>{{gas_requerido | number:'1.0-0'}} L</h1>
         </ion-text>
     </ion-card-content>
   </ion-card>
@@ -142,11 +142,83 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <h2>Sobre la regla de los tercios</h2>
         <p>
-          Con los datos que escribas sobre la inmersion que quieres hacer, hasta donde quieres penetrar o cuanto quieres estar en el viaje de ida, y la profundidad media de la inmersion,
-          la app te sugerira configuraciones tipicas de buceo en abierto aptas para la inmersion.
+          Con los datos que escribas sobre la inmersion que quieres hacer la app te sugerira configuraciones tipicas de buceo en abierto aptas para la inmersion. 
+          Ademas debes elegir el algoritmo para planificacion de gases que mas te apetezca, con este algoritmo, te sugeriremos que botellas necesitas para cumplirlo.
         </p>
+
+
+        <ion-note>
+          El color de los graficos, es verde para la ida, azul para la vuelta, y rojo de contigencia (debes salir con todo ese gas intacto en el mejor escenario posible)
+        </ion-note>
+
+
+        <h2>Tercios</h2>
+  
+        <ion-grid [fixed]="true">
+          <ion-row>
+            <ion-col class="gas-verde"></ion-col>
+            <ion-col class="gas-azul"></ion-col>
+            <ion-col class="gas-rojo"></ion-col>
+          </ion-row>
+        </ion-grid>
+
+
+        <h2>GUE</h2>
+
+        <ion-grid [fixed]="true">
+          <ion-row>
+            <ion-col class="gas-verde"></ion-col>
+            <ion-col class="gas-verde"></ion-col>
+            <ion-col class="gas-verde"></ion-col>
+            <ion-col class="gas-verde"></ion-col>
+            <ion-col class="gas-verde"></ion-col>
+            <ion-col class="gas-azul"></ion-col>
+            <ion-col class="gas-azul"></ion-col>
+            <ion-col class="gas-azul"></ion-col>
+            <ion-col class="gas-azul"></ion-col>
+            <ion-col class="gas-azul"></ion-col>
+            <ion-col class="gas-rojo"></ion-col>
+            <ion-col class="gas-rojo"></ion-col>
+            <ion-col class="gas-rojo"></ion-col>
+            <ion-col class="gas-rojo"></ion-col>
+            <ion-col class="gas-rojo"></ion-col>
+            <ion-col class="gas-rojo"></ion-col>
+            <ion-col class="gas-rojo"></ion-col>
+            <ion-col class="gas-rojo"></ion-col>
+          </ion-row>
+        </ion-grid>
+
+
+
+        <h2>Cuartos</h2>
+   
+        <ion-grid [fixed]="true">
+          <ion-row>
+            <ion-col class="gas-verde"></ion-col>
+            <ion-col class="gas-azul"></ion-col>
+            <ion-col class="gas-rojo"></ion-col>
+            <ion-col class="gas-rojo"></ion-col>
+          </ion-row>
+        </ion-grid>
+
+
+        <h2>Sextos</h2>
+   
+        <ion-grid [fixed]="true">
+          <ion-row>
+            <ion-col class="gas-verde"></ion-col>
+            <ion-col class="gas-azul"></ion-col>
+            <ion-col class="gas-rojo"></ion-col>
+            <ion-col class="gas-rojo"></ion-col>
+            <ion-col class="gas-rojo"></ion-col>
+            <ion-col class="gas-rojo"></ion-col>
+          </ion-row>
+        </ion-grid>
+
+
+
+
       </ion-content>
     </ng-template>
   </ion-modal>

@@ -78,15 +78,16 @@ export class SugerenciaGasPage {
       console.log(this.ionicForm.value)
     }
 
+    const gas_ida = ( this.tiempo * this.sac * ((this.profundidad / 10) + 1 ));
     switch (this.algoritmo) {
       case 'tercios':
-        this.gas_requerido = 3 * ( this.tiempo * this.sac * ((this.profundidad / 10) + 1 ))    
+        this.gas_requerido = 3 * gas_ida;
         break;
       case 'cuartos':
-        this.gas_requerido = 4 * ( this.tiempo * this.sac * ((this.profundidad / 10) + 1 ))    
+        this.gas_requerido = 4 * gas_ida;
         break;
-      case 'gue':
-        this.gas_requerido = 3 * ( this.tiempo * this.sac * ((this.profundidad / 10) + 1 ))    
+      case 'gue': //En GUE el viaje de ida son 5/18 avos
+        this.gas_requerido = (18/5) * gas_ida;
         break;
       default:
         break;
