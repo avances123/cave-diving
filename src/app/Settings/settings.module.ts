@@ -18,7 +18,7 @@ import { SettingsPageRoutingModule } from './settings-routing.module';
 })
 export class SettingsPageModule {}
 export interface ISettings {
-  rmv: number;
+  sac: number;
   velocidad_aleteo: number;
   velocidad_dpv: number;
   usar_dpv: boolean;

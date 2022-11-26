@@ -13,7 +13,7 @@ export class SugerenciaGasPage {
   @ViewChild(IonModal) modal: IonModal;
 
   
-  rmv: number = 20;
+  sac: number = 20;
   velocidad_aleteo: number;
   velocidad_dpv: number;
   velocidad: number;
@@ -45,7 +45,7 @@ export class SugerenciaGasPage {
 
 
   async init(){
-    this.rmv = await this.settingsService.get('rmv') || 20;
+    this.sac = await this.settingsService.get('sac') || 20;
     this.velocidad_aleteo = await this.settingsService.get('velocidad_aleteo') || 10;
     this.velocidad_dpv = await this.settingsService.get('velocidad_dpv') || 30;
     this.usar_dpv = await this.settingsService.get('usar_dpv') || false;
@@ -80,13 +80,13 @@ export class SugerenciaGasPage {
 
     switch (this.algoritmo) {
       case 'tercios':
-        this.gas_requerido = 3 * ( this.tiempo * this.rmv * ((this.profundidad / 10) + 1 ))    
+        this.gas_requerido = 3 * ( this.tiempo * this.sac * ((this.profundidad / 10) + 1 ))    
         break;
       case 'cuartos':
-        this.gas_requerido = 4 * ( this.tiempo * this.rmv * ((this.profundidad / 10) + 1 ))    
+        this.gas_requerido = 4 * ( this.tiempo * this.sac * ((this.profundidad / 10) + 1 ))    
         break;
       case 'gue':
-        this.gas_requerido = 3 * ( this.tiempo * this.rmv * ((this.profundidad / 10) + 1 ))    
+        this.gas_requerido = 3 * ( this.tiempo * this.sac * ((this.profundidad / 10) + 1 ))    
         break;
       default:
         break;

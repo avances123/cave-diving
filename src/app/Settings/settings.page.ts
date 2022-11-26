@@ -16,7 +16,7 @@ export class SettingsPage implements OnInit{
   ionicForm: FormGroup;
   isSubmitted = false;
 
-  rmv: number;
+  sac: number;
   velocidad_dpv: number;
   velocidad_aleteo: number;
 
@@ -25,14 +25,14 @@ export class SettingsPage implements OnInit{
   }
 
   async init(){
-    this.rmv = await this.settingsService.get('rmv') || 20;
+    this.sac = await this.settingsService.get('sac') || 20;
     this.velocidad_aleteo = await this.settingsService.get('velocidad_aleteo') || 10;
     this.velocidad_dpv = await this.settingsService.get('velocidad_dpv') || 30;
   }
   
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({
-      rmv: [this.rmv, [Validators.required]],
+      sac: [this.sac, [Validators.required]],
       velocidad_aleteo: [this.velocidad_aleteo, [Validators.required]],
       velocidad_dpv: [this.velocidad_dpv, [Validators.required]],
     })
@@ -45,7 +45,7 @@ export class SettingsPage implements OnInit{
 
   guardar() {
     console.log("Guardando settings:", this.settingsService)
-    this.settingsService.set("rmv", this.rmv)
+    this.settingsService.set("sac", this.sac)
     this.settingsService.set("velocidad_dpv", this.velocidad_dpv)
     this.settingsService.set("velocidad_aleteo", this.velocidad_aleteo);
 

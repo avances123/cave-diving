@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonModal } from '@ionic/angular';
-import { FormGroup, FormBuilder, Validators, ValidationErrors, ValidatorFn, AbstractControl } from "@angular/forms";
 import { SettingsService } from '../Settings/settings.service';
 
 @Component({
@@ -12,7 +11,7 @@ export class CalculoPenetracionPage {
   @ViewChild(IonModal) modal: IonModal;
 
 
-  rmv: number = 20;
+  sac: number = 20;
   velocidad_aleteo: number;
   velocidad_dpv: number;
   velocidad: number;
@@ -35,7 +34,7 @@ export class CalculoPenetracionPage {
 
 
   async init(){
-    this.rmv = await this.settingsService.get('rmv') || 20;
+    this.sac = await this.settingsService.get('sac') || 20;
     this.velocidad_aleteo = await this.settingsService.get('velocidad_aleteo') || 10;
     this.velocidad_dpv = await this.settingsService.get('velocidad_dpv') || 30;
   }
@@ -59,8 +58,8 @@ export class CalculoPenetracionPage {
     this.botellas.forEach( botella => this.gas_disponible += botella.capacidad * botella.presion )
 
     // Calcular tiempo de ida con el gas que tengo
-    console.log(this.gas_disponible, this.rmv, this.profundidad);
-    const tiempo_total = this.gas_disponible  / (this.rmv * ((this.profundidad / 10) + 1 ));
+    console.log(this.gas_disponible, this.sac, this.profundidad);
+    const tiempo_total = this.gas_disponible  / (this.sac * ((this.profundidad / 10) + 1 ));
     this.tiempo_trabajo = tiempo_total / 3;
     
     // Calcular penetracion maxima, es la distancia que puedo hacer aleteando con 1/3 de gas

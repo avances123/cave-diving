@@ -24,7 +24,7 @@
 
     <ion-card>
       <ion-card-header>
-        <ion-card-title>RMV Personal</ion-card-title>
+        <ion-card-title>SAC Personal</ion-card-title>
         <p>
           Cuantos litros de gas por minuto respiras? Es el famoso dato de consumo que debemos conocer, ya bien por experiencia o por fruto de un analisis de nuestro logbook. 
         </p>
@@ -32,9 +32,9 @@
 
       <ion-card-content>
         <ion-item fill="solid">
-          <ion-label position="floating">RMV personal [l/min]</ion-label>
-          <ion-input [(ngModel)]="rmv" name="rmv" formControlName="rmv" type="number" required></ion-input>
-          <ion-note slot="error" *ngIf="isSubmitted && errorControl.rmv.errors?.required">Campo obligatorio</ion-note>
+          <ion-label position="floating">SAC personal [l/min]</ion-label>
+          <ion-input [(ngModel)]="sac" name="sac" formControlName="sac" type="number" required></ion-input>
+          <ion-note slot="error" *ngIf="isSubmitted && errorControl.sac.errors?.required">Campo obligatorio</ion-note>
         </ion-item>
 
       </ion-card-content>
