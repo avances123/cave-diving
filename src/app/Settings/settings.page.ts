@@ -49,7 +49,7 @@ export class SettingsPage implements OnInit{
     this.settingsService.set("velocidad_dpv", this.velocidad_dpv)
     this.settingsService.set("velocidad_aleteo", this.velocidad_aleteo);
 
-    this.router.navigate(['gas/sugerir']);
+    this.router.navigate(['sugerir']);
   }
 
 

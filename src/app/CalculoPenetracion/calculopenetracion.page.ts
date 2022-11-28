@@ -16,13 +16,15 @@ export class CalculoPenetracionPage {
   velocidad_dpv: number;
   velocidad: number;
   usar_dpv: boolean = false;
+  solo_diving: boolean = false;
 
   botellas_fondo = [{'capacidad':12, 'presion':200},{'capacidad':12, 'presion':200}];
   botellas_etapas = [];
 
   profundidad: number;
   gas_disponible: number = 0;
-  tiempo_trabajo: number;
+  tiempo_trabajo: number; // el tercio  tipico
+  tiempo_ida: number; // puede ser menos que tiempo_trabajo si vas con dpv
   penetracion_maxima: number;
   presion_retorno:number;
   resultadoPintado = false;
@@ -61,21 +63,39 @@ export class CalculoPenetracionPage {
     this.botellas.forEach( botella => this.gas_disponible += botella.capacidad * botella.presion )
 
     // Calcular tiempo de ida con el gas que tengo
-    console.log(this.gas_disponible, this.sac, this.profundidad);
     const tiempo_total = this.gas_disponible  / (this.sac * ((this.profundidad / 10) + 1 ));
-    this.tiempo_trabajo = tiempo_total / 3;
+    switch (this.algoritmo) {
+      case 'tercios':
+        this.tiempo_trabajo = tiempo_total / 3;
+        break;
+      case 'cuartos':
+        this.tiempo_trabajo = tiempo_total / 4;
+        break;
+      case 'gue': //En GUE el viaje de ida son 5/18 avos
+        this.tiempo_trabajo = tiempo_total * (5 / 18);
+        break;
+      default:
+        break;
+    }
+
     
-    // Calcular penetracion maxima, es la distancia que puedo hacer aleteando con 1/3 de gas
-    const velocidad = this.usar_dpv ? this.velocidad_dpv : this.velocidad_aleteo ;
-    this.penetracion_maxima = this.tiempo_trabajo * velocidad;
+    
+    if (this.usar_dpv){
+      this.penetracion_maxima = (2 * this.tiempo_trabajo * this.velocidad_aleteo * this.velocidad_dpv) / (this.velocidad_aleteo + this.velocidad_dpv);
+      this.tiempo_ida = this.penetracion_maxima / this.velocidad_dpv;
+    } else {
+      this.penetracion_maxima = this.tiempo_trabajo * this.velocidad_aleteo;
+      this.tiempo_ida = this.penetracion_maxima / this.velocidad_aleteo;
+    }
 
-    // presion de retorno
-    let presion_acum = 0;
-    this.botellas.forEach( botella => presion_acum += botella.presion )
-    const presion_media = presion_acum / this.botellas.length
-    this.presion_retorno = presion_media * 2 / 3;
 
 
+
+
+
+
+
+    this.presion_retorno = 0;
     this.resultadoPintado = true;
   }
 }
