@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonModal } from '@ionic/angular';
 import { SettingsService } from '../Settings/settings.service';
+import { BuhlmannAlgorithm } from '../scuba-physics/BuhlmannAlgorithm'
 
 @Component({
   selector: 'app-calculopenetracion',
@@ -9,7 +10,7 @@ import { SettingsService } from '../Settings/settings.service';
 })
 export class CalculoPenetracionPage {
   @ViewChild(IonModal) modal: IonModal;
-
+  isModalOpen = false;
 
   sac: number = 20;
   velocidad_aleteo: number;
@@ -21,17 +22,18 @@ export class CalculoPenetracionPage {
   botellas_fondo = [{'capacidad':12, 'presion':200},{'capacidad':12, 'presion':200}];
   botellas_etapas = [];
 
-  profundidad: number;
+  profundidad: number = 20;
   gas_disponible: number = 0;
   tiempo_trabajo: number; // el tercio  tipico
   tiempo_ida: number; // puede ser menos que tiempo_trabajo si vas con dpv
   penetracion_maxima: number;
   presion_retorno:number;
   resultadoPintado = false;
-  algoritmo: string;
+  algoritmo: string = "tercios";
 
   constructor(private settingsService: SettingsService) {
     this.init()
+    const algo = new BuhlmannAlgorithm();
   }
 
   async init(){
@@ -52,9 +54,13 @@ export class CalculoPenetracionPage {
     return [...this.botellas_fondo, ...this.botellas_etapas];
   }
 
-  cancelModal() {
-    this.modal.dismiss(null, 'cancel');
+
+  toggleModal(isOpen: boolean) {
+    console.log("abriendo", isOpen)
+    this.isModalOpen = isOpen;
   }
+
+
 
   calcular() {
 

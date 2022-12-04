@@ -5,3 +5,47 @@
     -ms-transform: translateY(-60%);
     transform: translateY(-60%);
   }
+
+
+  .gas-verde {
+    background-color: #135d54;
+    border: solid 1px #fff;
+    color: #fff;
+    text-align: center;
+}
+
+.gas-azul {
+    background-color: #3255f0;
+    border: solid 1px #fff;
+    color: #fff;
+    text-align: center;
+}
+
+.gas-rojo {
+    background-color: #e61f40;
+    border: solid 1px #fff;
+    color: #fff;
+    text-align: center;
+}
+
+
+.icono-add {
+  font-size: 30px;
+}
+
+
+.presion-retorno {
+  background-color: brown;
+}
+
+
+.presion-retorno{
+	padding: 8px 10px;
+	border-radius: 10px;
+	font-weight: 600;
+	font-size: 12px;
+	box-shadow: 0 2px 5px rgba(0,0,0,.25);
+	margin: 0 10px;
+  background: #2F4058;
+	color: whitesmoke;
+}
