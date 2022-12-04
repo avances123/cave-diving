@@ -19,8 +19,8 @@ export class CalculoPenetracionPage {
   usar_dpv: boolean = false;
   solo_diving: boolean = false;
 
-  botellas_fondo = [{'capacidad':12, 'presion':200},{'capacidad':12, 'presion':200}];
-  botellas_etapas = [{'capacidad':11.1, 'presion':200}];
+  botellas_fondo = [{capacidad:12, presion: 200, retorno: 200},{capacidad:12, presion: 200, retorno: 200}];
+  botellas_etapas = [{capacidad:11.1, presion: 200, retorno: 200}];
 
   profundidad: number = 20;
   gas_disponible: number = 0;
@@ -44,11 +44,11 @@ export class CalculoPenetracionPage {
   }
 
   onFondoClick(){
-    this.botellas_fondo.push({'capacidad':12, 'presion': 200})
+    this.botellas_fondo.push({capacidad:12, presion: 200, retorno: 200})
   }
 
   onEtapasClick(){
-    this.botellas_etapas.push({'capacidad':11.1, 'presion': 200})
+    this.botellas_etapas.push({capacidad:11.1, presion: 200, retorno: 200})
   }
 
   get botellas(){
@@ -98,7 +98,23 @@ export class CalculoPenetracionPage {
 
 
 
-
+    this.botellas.forEach( botella => {
+      switch (this.algoritmo) {
+        case 'tercios':
+          botella.retorno = 2 * botella.presion / 3;
+          break;
+        case 'cuartos':
+          botella.retorno = 2 * botella.presion / 4;
+          break;
+        case 'gue': //En GUE el viaje de ida son 5/18 avos
+          botella.retorno = 2 * botella.presion * (5 / 18);
+          break;
+        default:
+          break;
+      }
+      // redondeo hacia arriba
+      botella.retorno = Math.ceil(botella.retorno / 10 ) * 10
+    })
 
 
 
