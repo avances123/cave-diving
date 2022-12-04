@@ -20,7 +20,7 @@ export class CalculoPenetracionPage {
   solo_diving: boolean = false;
 
   botellas_fondo = [{'capacidad':12, 'presion':200},{'capacidad':12, 'presion':200}];
-  botellas_etapas = [];
+  botellas_etapas = [{'capacidad':11.1, 'presion':200}];
 
   profundidad: number = 20;
   gas_disponible: number = 0;
