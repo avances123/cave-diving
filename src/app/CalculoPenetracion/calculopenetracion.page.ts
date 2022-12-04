@@ -30,6 +30,7 @@ export class CalculoPenetracionPage {
   presion_retorno:number;
   resultadoPintado = false;
   algoritmo: string = "tercios";
+  abandonar_etapas = true;
 
   constructor(private settingsService: SettingsService) {
     this.init()

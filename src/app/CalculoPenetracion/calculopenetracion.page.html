@@ -43,9 +43,17 @@
             <!-- <ion-note slot="error" *ngIf="requerido">Campo obligatorio</ion-note> -->
           </ion-item>
           <ion-item lines="none">
+            <ion-label>Dejar etapas en el hilo?</ion-label>
+            <ion-toggle [enableOnOffLabels]="true" [(ngModel)]="abandonar_etapas"  slot="end"></ion-toggle>
+          </ion-item>
+          <!-- <ion-item lines="none">
+            <ion-label>Gastar por completo las etapas?</ion-label>
+            <ion-toggle [enableOnOffLabels]="true" [(ngModel)]="usar_dpv"  slot="end"></ion-toggle>
+          </ion-item> -->
+          <!-- <ion-item lines="none">
             <ion-label>Usar DPV?</ion-label>
             <ion-toggle [enableOnOffLabels]="true" [(ngModel)]="usar_dpv"  slot="end" disabled></ion-toggle>
-          </ion-item>
+          </ion-item> -->
           <!-- <ion-item>
             <ion-label>Solo diving?</ion-label>
             <ion-toggle [enableOnOffLabels]="true" [(ngModel)]="solo_diving"  slot="end"></ion-toggle>
@@ -67,55 +75,86 @@
         <!-- <p>Conociendo el gas que tienen tus botellas, podemos calcular la penetracion maxima o maximo tiempo de trabajo en la inmersion, 
           y darte una presion de retorno segun los algoritmos de planificacion de gases conocidos</p> -->
 
-        <ion-list>
-          <ion-list-header>
-            <ion-label>Fondo</ion-label>
-            <ion-button (click)="onFondoClick()">
-              <ion-icon name="add-circle-outline" slot="end" class="icono-add"></ion-icon>
-            </ion-button>
-          </ion-list-header>
-          <ion-item *ngFor="let botella of botellas_fondo; let i=index" fill="solid">
-            <ion-row>
+
+
+
+        <div>
+          <ion-grid>
+            <ion-row class="ion-align-items-center">
               <ion-col>
-                <ion-label position="floating">Capacidad</ion-label>
-                <ion-input [ngModelOptions]="{standalone: true}"  [(ngModel)]="botella['capacidad']" type="number"></ion-input>
+                <h2 size="auto">Fondo</h2>
               </ion-col>
-              <ion-col>
-                <ion-label position="floating">Presion</ion-label>
-                <ion-input [ngModelOptions]="{standalone: true}"  [(ngModel)]="botella['presion']" type="number"></ion-input>
+              <ion-col size="auto">
+                <ion-button (click)="onFondoClick()" fill="clear" style="margin-right: -22px;">
+                  <ion-icon name="add-circle-outline" slot="end" class="icono-add" ></ion-icon>
+                </ion-button>
               </ion-col>
+              
             </ion-row>
-            <ion-icon (click)="botellas_fondo.splice(i, 1);" name="close-circle" size="small" slot="end"></ion-icon>
-          </ion-item>
-        </ion-list>
-        <ion-list>
-          <ion-list-header>
-            <ion-label>Etapas</ion-label>
-            <ion-button (click)="onEtapasClick()">
-              <ion-icon name="add-circle-outline" slot="end" class="icono-add"></ion-icon>
-            </ion-button>
-          </ion-list-header>
-          <ion-item *ngFor="let botella of botellas_etapas; let i=index" fill="solid">
-            <ion-grid item-content>
-              <ion-row>
-                <ion-col>
-                  <ion-label position="floating">Capacidad</ion-label>
+            <ion-row *ngFor="let botella of botellas_fondo; let i=index" fill="solid" class="ion-align-items-center">
+              <ion-icon (click)="botellas_fondo.splice(i, 1);" name="close-circle" size="small"></ion-icon>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label  position="floating">Capacidad</ion-label>
                   <ion-input [ngModelOptions]="{standalone: true}"  [(ngModel)]="botella['capacidad']" type="number"></ion-input>
-                </ion-col>
-                <ion-col>
-                  <ion-label position="floating">Presion</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label  position="floating">Presion</ion-label>
                   <ion-input [ngModelOptions]="{standalone: true}"  [(ngModel)]="botella['presion']" type="number"></ion-input>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
+                </ion-item>
+              </ion-col>
+
+              <ion-badge color="primary">{{i + 1}}</ion-badge>
+
+            </ion-row>
+          </ion-grid>
+        </div>
 
 
-            
-            <ion-icon (click)="botellas_etapas.splice(i, 1);" name="close-circle" size="small" slot="end"></ion-icon>
+        <div>
+          <ion-grid>
+            <ion-row class="ion-align-items-center">
+              <ion-col>
+                <h2 size="auto">Etapas</h2>
+              </ion-col>
+              <ion-col size="auto">
+                <ion-button (click)="onEtapasClick()" fill="clear" style="margin-right: -22px;">
+                  <ion-icon name="add-circle-outline" slot="end" class="icono-add" ></ion-icon>
+                </ion-button>
+              </ion-col>
+              
+            </ion-row>
+            <ion-row *ngFor="let botella of botellas_etapas; let i=index" fill="solid" class="ion-align-items-center">
+              <ion-icon (click)="botellas_etapas.splice(i, 1);" name="close-circle" size="small"></ion-icon>
 
-          </ion-item>
+              <ion-col>
+                <ion-item>
+                  <ion-label  position="floating">Capacidad</ion-label>
+                  <ion-input [ngModelOptions]="{standalone: true}"  [(ngModel)]="botella['capacidad']" type="number"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label  position="floating">Presion</ion-label>
+                  <ion-input [ngModelOptions]="{standalone: true}"  [(ngModel)]="botella['presion']" type="number"></ion-input>
+                </ion-item>
+              </ion-col>
+              <!-- <ion-col size="2">
+                <ion-note sytle="overflow-wrap: break-word;">Clipar en el hilo?</ion-note>
+              </ion-col>
+              <ion-checkbox style="margin: 10px;"></ion-checkbox> -->
 
-        </ion-list>
+              <ion-badge color="secondary">{{i + 1}}</ion-badge>
+
+            </ion-row>
+          </ion-grid>
+        </div>
+        
+        
+
       </ion-card-content>
     </ion-card>
 
@@ -197,6 +236,8 @@
           <ion-label>Fondo</ion-label>
         </ion-list-header>
         <ion-item *ngFor="let botella of botellas_fondo; let i=index" >
+          <ion-badge>{{i + 1}}</ion-badge>
+
           <ion-grid [fixed]="true">
             <ion-row class="ion-align-items-center">
               <ion-col>
@@ -206,10 +247,9 @@
               <ion-col  size="auto">
                 <ion-label class="presion-retorno">140</ion-label>
               </ion-col>
+              bar
             </ion-row>
-            <ion-row>
-              <ion-progress-bar [value]="0.6"></ion-progress-bar>
-            </ion-row>
+            
           </ion-grid>
         </ion-item>
       </ion-list>
@@ -218,6 +258,7 @@
           <ion-label>Etapas</ion-label>
         </ion-list-header>
         <ion-item *ngFor="let botella of botellas_etapas; let i=index" >
+          <ion-badge color="secondary">{{i + 1}}</ion-badge>
           <ion-grid [fixed]="true">
             <ion-row class="ion-align-items-center">
               <ion-col>
@@ -227,10 +268,9 @@
               <ion-col  size="auto">
                 <ion-label class="presion-retorno">140</ion-label>
               </ion-col>
+              bar
             </ion-row>
-            <ion-row>
-              <ion-progress-bar [value]="0.6"></ion-progress-bar>
-            </ion-row>
+           
           </ion-grid>
         </ion-item>
       </ion-list>
