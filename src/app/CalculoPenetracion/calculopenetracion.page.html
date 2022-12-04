@@ -96,18 +96,25 @@
             </ion-button>
           </ion-list-header>
           <ion-item *ngFor="let botella of botellas_etapas; let i=index" fill="solid">
-            <ion-row>
-              <ion-col>
-                <ion-label position="floating">Capacidad</ion-label>
-                <ion-input [ngModelOptions]="{standalone: true}"  [(ngModel)]="botella['capacidad']" type="number"></ion-input>
-              </ion-col>
-              <ion-col>
-                <ion-label position="floating">Presion</ion-label>
-                <ion-input [ngModelOptions]="{standalone: true}"  [(ngModel)]="botella['presion']" type="number"></ion-input>
-              </ion-col>
-            </ion-row>
+            <ion-grid item-content>
+              <ion-row>
+                <ion-col>
+                  <ion-label position="floating">Capacidad</ion-label>
+                  <ion-input [ngModelOptions]="{standalone: true}"  [(ngModel)]="botella['capacidad']" type="number"></ion-input>
+                </ion-col>
+                <ion-col>
+                  <ion-label position="floating">Presion</ion-label>
+                  <ion-input [ngModelOptions]="{standalone: true}"  [(ngModel)]="botella['presion']" type="number"></ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+
+            
             <ion-icon (click)="botellas_etapas.splice(i, 1);" name="close-circle" size="small" slot="end"></ion-icon>
+
           </ion-item>
+
         </ion-list>
       </ion-card-content>
     </ion-card>
@@ -169,14 +176,7 @@
             <p>Distancia máxima hasta donde llegar antes de dar la vuelta</p>
           </ion-label>
         </ion-item>
-        <ion-item>
-          <ion-icon name="speedometer-outline" size="large" slot="start"></ion-icon>
-          <ion-label class="ion-text-wrap">
-            <h1>{{140 | number:'1.0-0'}} bar</h1>
-            <p>Presion de Retorno</p>
-          </ion-label>
-        </ion-item>
-      
+        
       </ion-list>
 
     </ion-card-content>
@@ -197,6 +197,27 @@
           <ion-label>Fondo</ion-label>
         </ion-list-header>
         <ion-item *ngFor="let botella of botellas_fondo; let i=index" >
+          <ion-grid [fixed]="true">
+            <ion-row class="ion-align-items-center">
+              <ion-col>
+                <ion-label>{{botella['capacidad']}} L | {{botella['presion']}} bar</ion-label>
+              </ion-col>
+              
+              <ion-col  size="auto">
+                <ion-label class="presion-retorno">140</ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-progress-bar [value]="0.6"></ion-progress-bar>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+      <ion-list *ngIf="botellas_etapas.length">
+        <ion-list-header>
+          <ion-label>Etapas</ion-label>
+        </ion-list-header>
+        <ion-item *ngFor="let botella of botellas_etapas; let i=index" >
           <ion-grid [fixed]="true">
             <ion-row class="ion-align-items-center">
               <ion-col>
