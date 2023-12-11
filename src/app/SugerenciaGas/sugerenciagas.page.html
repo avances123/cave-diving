@@ -38,7 +38,7 @@
       </ion-card-header>
 
       <ion-card-content>
-        <p>Profundidad media a la que calculas que estaras en la cueva</p>
+        <p>Profundidad media a la que calculas que estarás en la cueva</p>
         <ion-item fill="solid">
           <ion-label position="floating">Profundidad [m]</ion-label>
           <ion-input [(ngModel)]="profundidad" formControlName="profundidad" name="profundidad" required type="number"></ion-input>
@@ -85,7 +85,7 @@
   <ion-card *ngIf="resultadoPintado">
     <ion-card-header>
       <ion-card-title>Resultado</ion-card-title>
-      <ion-card-subtitle>Datos calculados utiles para planificar la inmersion <ion-text color="danger">En ningun calculo se tiene en cuenta el gas requerido para la descompresion </ion-text></ion-card-subtitle>
+      <ion-card-subtitle>Datos calculados utiles para planificar la inmersion <ion-text color="danger">En ningún cálculo se tiene en cuenta el gas requerido para la descompresion </ion-text></ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
@@ -153,7 +153,7 @@
         </ion-note>
 
 
-        <h2>Tercios</h2>
+        <h3>Tercios</h3>
   
         <ion-grid [fixed]="true">
           <ion-row>
@@ -164,7 +164,7 @@
         </ion-grid>
 
 
-        <h2>GUE</h2>
+        <h3>GUE</h3>
 
         <ion-grid [fixed]="true">
           <ion-row>
@@ -191,7 +191,7 @@
 
 
 
-        <h2>Cuartos</h2>
+        <h3>Cuartos</h3>
    
         <ion-grid [fixed]="true">
           <ion-row>
@@ -203,9 +203,9 @@
         </ion-grid>
 
 
-        <h2>Sextos</h2>
+        <h3>Sextos</h3>
    
-        <ion-grid [fixed]="true">
+        <ion-grid [fixed]="true" style="margin-bottom: 20px;">
           <ion-row>
             <ion-col class="gas-verde"></ion-col>
             <ion-col class="gas-azul"></ion-col>
@@ -217,7 +217,12 @@
         </ion-grid>
 
 
-
+        <ion-note>
+          Esta aplicación proporciona solo información, no constituye planificacion real y no debe ser tratada como tal por el usuario. 
+          Por lo tanto, esta Aplicación no puede ser considerada como base para una planificacion o como una recomendación para buceo en cuevas basada en ella. 
+          La información en esta aplicación no sustituye la planificacion del buceo por el interesado. 
+          Todo el contenido, incluido texto, gráficos, imágenes e información, contenido en o disponible a través de esta Aplicación es solo con fines informativos generales.
+        </ion-note>
 
       </ion-content>
     </ng-template>

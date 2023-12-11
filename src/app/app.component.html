@@ -2,7 +2,11 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
-        <ion-list-header>Cave Diver App</ion-list-header>
+        <!-- <ion-list-header>Cave Diver App</ion-list-header> -->
+
+        <h1 style="margin-left:10px; vertical-align:text-bottom"><ion-icon src="assets/logo.svg" style="margin-right:10px; vertical-align:text-bottom"></ion-icon>Cave Diver</h1>
+
+
         <ion-note>La app para buceo en cuevas</ion-note>
 
         <ion-list id="inbox-list">
@@ -15,7 +19,7 @@
           </ion-menu-toggle>
         </ion-list>
 
-        <ion-list id="inbox-list">
+        <!-- <ion-list id="inbox-list">
           <ion-list-header>Inmersion de trabajo</ion-list-header>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of trabajoPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
@@ -23,7 +27,7 @@
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
-        </ion-list>
+        </ion-list> -->
 
         <ion-list id="labels-list">
           <ion-list-header>Personal</ion-list-header>

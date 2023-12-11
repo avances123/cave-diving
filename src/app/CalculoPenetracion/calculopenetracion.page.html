@@ -159,20 +159,21 @@
     </ion-card>
 
 
-
     <div style="margin: 10px; margin-top: 20px;">
       <ion-item >
+        <ion-icon slot="end" icon="calculator"></ion-icon>
         <ion-select [(ngModel)]="algoritmo" interface="action-sheet" placeholder="Elegir Algoritmo" name="algoritmo" required >
           <ion-select-option value="tercios">Tercios Basico</ion-select-option>
           <ion-select-option value="cuartos">Cuartos Basico</ion-select-option>
           <ion-select-option value="gue">GUE</ion-select-option>
         </ion-select>
-        <ion-button (click)="calcular()" expand="block"   [disabled]="!profundidad || !algoritmo" slot="end">
-          Calcular Inmersion 
-          <ion-icon slot="start" icon="calculator"></ion-icon>
-        </ion-button>
       </ion-item>
+      <ion-button (click)="calcular()" expand="block"   [disabled]="!profundidad || !algoritmo" slot="end">
+        Calcular Gas
+        <ion-icon slot="start" icon="calculator"></ion-icon>
+      </ion-button>
     </div>
+
 
   </div>
 
@@ -185,7 +186,7 @@
   <ion-card *ngIf="resultadoPintado">
     <ion-card-header>
       <ion-card-title>Resultado</ion-card-title>
-      <ion-card-subtitle>Datos calculados utiles para planificar la inmersion </ion-card-subtitle>
+      <ion-card-subtitle>Datos calculados utiles para planificar la inmersion <ion-text color="danger">En ningún cálculo se tiene en cuenta el gas requerido para la descompresion </ion-text></ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
@@ -205,14 +206,14 @@
           <ion-icon name="time-outline" size="large" slot="start"></ion-icon>
           <ion-label class="ion-text-wrap">
             <h1>{{tiempo_ida | number:'1.0-0'}} min</h1>
-            <p>Tiempo disponible para el viaje de ida</p>
+            <p>Tiempo disponible para el viaje de ida <a [routerLink]="['/settings']">Modificar aleteo</a></p>
           </ion-label>
         </ion-item>
         <ion-item>
           <ion-icon name="code-working-outline" size="large" slot="start"></ion-icon>
           <ion-label class="ion-text-wrap">
             <h1>{{penetracion_maxima | number:'1.0-0'}} m</h1>
-            <p>Distancia máxima hasta donde llegar antes de dar la vuelta</p>
+            <p>Distancia máxima hasta donde llegar antes de dar la vuelta </p>
           </ion-label>
         </ion-item>
         
@@ -311,7 +312,7 @@
         </ion-note>
 
 
-        <h2>Tercios</h2>
+        <h3>Tercios</h3>
   
         <ion-grid [fixed]="true">
           <ion-row>
@@ -322,7 +323,7 @@
         </ion-grid>
 
 
-        <h2>GUE</h2>
+        <h3>GUE</h3>
 
         <ion-grid [fixed]="true">
           <ion-row>
@@ -349,7 +350,7 @@
 
 
 
-        <h2>Cuartos</h2>
+        <h3>Cuartos</h3>
    
         <ion-grid [fixed]="true">
           <ion-row>
@@ -361,9 +362,9 @@
         </ion-grid>
 
 
-        <h2>Sextos</h2>
+        <h3>Sextos</h3>
    
-        <ion-grid [fixed]="true">
+        <ion-grid [fixed]="true"  style="margin-bottom: 20px;">
           <ion-row>
             <ion-col class="gas-verde"></ion-col>
             <ion-col class="gas-azul"></ion-col>
@@ -375,6 +376,13 @@
         </ion-grid>
 
 
+        <h2>Disclaimer</h2>
+        <ion-note>
+          Esta aplicación proporciona solo información, no constituye planificacion real y no debe ser tratada como tal por el usuario. 
+          Por lo tanto, esta Aplicación no puede ser considerada como base para una planificacion o como una recomendación para buceo en cuevas basada en ella. 
+          La información en esta aplicación no sustituye la planificacion del buceo por el interesado. 
+          Todo el contenido, incluido texto, gráficos, imágenes e información, contenido en o disponible a través de esta Aplicación es solo con fines informativos generales.
+        </ion-note>
 
 
       </ion-content>
